@@ -63,5 +63,5 @@ test('openbare versie deelt geen bronafbeeldingen of documentdownloads',()=>{
  assert.match(read('.gitignore'),/docenten-documenten\//);
 });
 test('beide ingangen gebruiken bestaande relatieve assets',()=>{
- for(const page of [html,teacher])for(const [,href] of page.matchAll(/(?:src|href)="(assets\/[^"#]+)"/g))assert.ok(fs.existsSync(path.join(dir,href)),href);
+ for(const page of [html,teacher])for(const [,href] of page.matchAll(/(?:src|href)="(assets\/[^"#]+)"/g))assert.ok(fs.existsSync(path.join(dir,href.split('?')[0])),href);
 });
