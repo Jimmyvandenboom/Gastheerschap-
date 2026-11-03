@@ -7,6 +7,17 @@ const assert = require('node:assert/strict');
   const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base);await page.locator('.hero').waitFor();
+  assert.equal(await page.locator('.meeting-button').count(),8);
+  for(const design of ['1','2','3']){
+   await page.locator(`button[data-design="${design}"]`).click();await page.reload();
+   assert.equal(await page.locator('body').getAttribute('data-design'),design);
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  }
+  await page.locator('button[data-design="1"]').click();
+  for(const img of await page.locator('img').all())assert.ok(await img.evaluate(el=>el.complete&&el.naturalWidth>0),'afbeelding geladen');
+  await page.screenshot({path:`/tmp/gastheerschap-home-${width}.png`,fullPage:true});
+  await page.locator('.meeting-button').nth(7).click();assert.match(await page.locator('.meeting-button.selected').innerText(),/8/);
+  await page.goBack();await page.locator('.hero').waitFor();
   const routes=await page.locator('.nav-btn').evaluateAll(xs=>xs.map(x=>x.dataset.nav));
   for(const route of routes){
    await page.evaluate(r=>document.querySelector(`[data-nav="${r}"]`).click(),route);
@@ -14,7 +25,7 @@ const assert = require('node:assert/strict');
    assert.ok(await page.locator('main').innerText());
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${width}: overflow ${route}`);
   }
-  await page.goto(base+'#programme');
+  await page.goto(base+'#programme');await page.locator('.meeting-button').first().click();
   await page.locator('[data-check]').first().check();await page.reload();assert.equal(await page.locator('[data-check]').first().isChecked(),true);
   await page.goto(base+'#interactive');
   const data=await page.evaluate(()=>window.GH_DATA.lessonInteractions[0]);
