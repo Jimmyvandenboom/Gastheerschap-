@@ -73,3 +73,11 @@ Voor GitHub Pages: voeg alleen openbare bestanden toe aan de PR; controleer `git
 ### Homescreen-icoon
 
 De app gebruikt een eigen Gastheerschap-icoon (theekop met fonkeling), los van het officiële schoollogo. `manifest.webmanifest` bevat relatieve paden en Android-iconen van 192 en 512 pixels, inclusief een maskable variant. Beide ingangen verwijzen ook naar een Apple-touch-icoon van 180 pixels en een favicon. Het manifest voegt geen offlinefunctionaliteit toe. Een bestaande homescreen-snelkoppeling kan het oude icoon vasthouden; verwijder dan uitsluitend de snelkoppeling en voeg de website opnieuw toe. Wis geen websitegegevens: daarin staat de lokale voortgang.
+
+## Periode 1 en Periode 2
+
+Linksboven kies je de periode. `?periode=1` opent het nieuwe lunchprogramma (standaard voor nieuwe gebruikers), `?periode=2` de oorspronkelijke acht bijeenkomsten voor Nolenshage. De laatst gekozen periode wordt onthouden. `assets/periods.js` maakt een afzonderlijke inhoudsvariant; de oorspronkelijke data voor periode 2 blijven behouden.
+
+Periode 1: bijeenkomst 1 is een carrousel met vier stations (bereiden, indekken, poleren, borden dragen), bijeenkomst 2 is een repetitie, bijeenkomst 3 de docentenlunch voor leerlingen + vier docenten, 11.30–12.00 uur. Lunchdatum en lokaal moeten worden bevestigd. Club sandwich met gegaarde kip of vegetarisch beleg is voorlopig; luxe broodje gezond staat als eenvoudig alternatief klaar. Foto-/videobewijs gaat naar de schoollocatie, niet naar deze openbare site.
+
+Voortgang en exports zijn per periode gescheiden. Bestaande opslag `maris-gastheerschap-v1.2` blijft bij periode 2. Periode 1 gebruikt `maris-gastheerschap-periode1-v1`. Oudere exports zonder periodeaanduiding horen bij periode 2. Importeer bestanden in de juiste periode. De periode-1-rubric gebruikt dezelfde gewichten en drie volledig beoordeelde bereidingen, één per bijeenkomst, plus alle overige criteria. Dit is een lesvoorstel dat de docent moet bevestigen. Periode 2 houdt de eis van minimaal vijf kookmomenten.

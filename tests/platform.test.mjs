@@ -32,7 +32,7 @@ test('high tea Nolenshage en open datum blijven bewaard',()=>{
 test('transparante rubric met gewichten 30 20 20 20 10',()=>{
  assert.deepEqual(Array.from(data.rubric.sections,x=>x.weight),[30,20,20,20,10]);
  assert.equal(data.rubric.sections[0].criteria.length*3,48);
- assert.match(app,/completeCooks\.length>=5/);
+ assert.match(app,/completeCooks\.length>=\(DATA\.requiredCooks\|\|5\)/);
  assert.match(app,/result\.grade/);
 });
 test('zelfnakijken, voortgang en lokaal bewaren behouden',()=>{
@@ -64,4 +64,21 @@ test('openbare versie deelt geen bronafbeeldingen of documentdownloads',()=>{
 });
 test('beide ingangen gebruiken bestaande relatieve assets',()=>{
  for(const page of [html,teacher])for(const [,href] of page.matchAll(/(?:src|href)="(assets\/[^"#]+)"/g))assert.ok(fs.existsSync(path.join(dir,href.split('?')[0])),href);
+});
+
+test('periode 1 heeft drie lessen, eigen lunch en behoudt periode 2',()=>{
+ const window={};vm.runInNewContext(read('assets/content.js'),{window});
+ const original=JSON.stringify(window.GH_DATA);
+ vm.runInNewContext(read('assets/periods.js'),{window,structuredClone,URLSearchParams,location:{search:'?periode=1'},localStorage:{setItem(){}}});
+ assert.equal(window.GH_DATA.sessions.length,3);
+ assert.equal(window.GH_DATA.requiredCooks,3);
+ assert.equal(window.GH_DATA.cookMoments,3);
+ assert.match(window.GH_DATA.meta.eventTime,/11.30–12.00/);
+ assert.equal(window.GH_DATA.lessonInteractions.length,3);
+ assert.ok(window.GH_DATA.sessions.every(s=>s.tasks.length>=6));
+ assert.match(JSON.stringify(window.GH_DATA.sessions),/poleren/i);
+ assert.match(JSON.stringify(window.GH_DATA.sessions),/borden/i);
+ vm.runInNewContext(read('assets/content.js'),{window});
+ vm.runInNewContext(read('assets/periods.js'),{window,structuredClone,URLSearchParams,location:{search:'?periode=2'},localStorage:{setItem(){}}});
+ assert.equal(JSON.stringify(window.GH_DATA),original);
 });
