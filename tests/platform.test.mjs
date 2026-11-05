@@ -82,3 +82,14 @@ test('periode 1 heeft drie lessen, eigen lunch en behoudt periode 2',()=>{
  vm.runInNewContext(read('assets/periods.js'),{window,structuredClone,URLSearchParams,location:{search:'?periode=2'},localStorage:{setItem(){}}});
  assert.equal(JSON.stringify(window.GH_DATA),original);
 });
+
+test('aparte leskaart heeft alle onderdelen en bestaande lokale assets',()=>{
+ const page=read('bijeenkomst-1.html');
+ for(const id of ['koken','indekken','poleren','borden','voorbereiden','bewijs'])assert.match(page,new RegExp('id="'+id+'"'));
+ assert.match(page,/KC Aquamarijn/);
+ assert.match(page,/assets\/lesson.js/);
+ assert.match(app,/window.open\('bijeenkomst-1.html','_blank','noopener'\)/);
+ for(const [,href]of page.matchAll(/(?:href|src)="([^"#][^"]*)"/g)){
+  if(!href.startsWith('https:'))assert.ok(fs.existsSync(path.join(dir,href.split(/[?#]/)[0])),href);
+ }
+});

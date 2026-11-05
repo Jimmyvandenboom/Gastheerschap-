@@ -58,7 +58,15 @@ const assert = require('node:assert/strict');
   await page.goto(base+'?periode=1');
   assert.equal(await page.locator('.meeting-button').count(),3);
   assert.match(await page.locator('main').innerText(),/vier docenten/);
-  await page.locator('.meeting-button').first().click();
+  const popupPromise=context.waitForEvent('page',{timeout:10000});await page.locator('.meeting-button').first().click();
+  const popup=await popupPromise;await popup.waitForLoadState();assert.match(popup.url(),/bijeenkomst-1.html/);
+  assert.equal(await popup.locator('.instruction-image').count(),3);
+  for(const img of await popup.locator('.instruction-image').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(el=>el.decode());}
+  await popup.locator('#indekken').scrollIntoViewIfNeeded();await popup.screenshot({path:`/tmp/gastheerschap-les1-${width}.png`});
+  await popup.locator('#portions').fill('16');assert.match(await popup.locator('#shopping-list').innerText(),/48 sneetjes/);
+  await popup.locator('#lesson-checklist input').first().check();await popup.reload();assert.equal(await popup.locator('#lesson-checklist input').first().isChecked(),true);
+  assert.ok(await popup.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await popup.close();
+  await page.goto(base+'?periode=1#programme');
   assert.match(await page.locator('main').innerText(),/4 × 20 min/);
   await page.locator('[data-check]').first().check();await page.reload();
   assert.equal(await page.locator('[data-check]').first().isChecked(),true);
