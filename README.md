@@ -85,3 +85,7 @@ Voortgang en exports zijn per periode gescheiden. Bestaande opslag `maris-gasthe
 ### Aparte leskaart voor bijeenkomst 1 (periode 1)
 
 Klik op bijeenkomst 1 voor `bijeenkomst-1.html` in een nieuw tabblad. Deze pagina bevat de volledige carrousel, KC Aquamarijn, het clubsandwichrecept, een rekenbare boodschappenlijst, drie instructieafbeeldingen voor de overige stations en een aparte lokale bewijschecklist. De afbeeldingen zijn gegenereerde lesillustraties, geen foto’s van de werkelijke schoolinstructie; de docentdemonstratie blijft leidend. Er zijn geen externe videospelers of trackers nodig. De checklist staat los van de algemene aftekenlijst en uploadt geen foto’s of video’s. De knop “Print les & boodschappen” print het gekozen aantal porties mee.
+
+### Losse site voor de praktijkdag
+
+`morgen.html` is de directe, zelfstandige dagpagina: koken staat los van de carrousel (indekken, poleren, borden dragen). Een derde deel behandelt boodschappen en het ophalen van extra formulieren en Kapla bij KC Aquamarijn. Het groepsoverzicht per onderdeel is uitsluitend lokaal op één apparaat en gebruikt groepcodes; formele inschrijvingen blijven op schoolformulieren. `assets/morgen.js` bewaart indeling en bewijscheck apart van de overige lespagina’s. Print het dagplan om de indeling te delen. De benodigde ingrediënten moeten vóór het koken terug zijn; de docent bepaalt tijden, route en groepsbegeleiding.
