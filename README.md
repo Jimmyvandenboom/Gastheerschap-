@@ -88,4 +88,6 @@ Klik op bijeenkomst 1 voor `bijeenkomst-1.html` in een nieuw tabblad. Deze pagin
 
 ### Losse site voor de praktijkdag
 
-`morgen.html` is de directe, zelfstandige dagpagina: koken staat los van de carrousel (indekken, poleren, borden dragen). Een derde deel behandelt boodschappen en het ophalen van extra formulieren en Kapla bij KC Aquamarijn. Het groepsoverzicht per onderdeel is uitsluitend lokaal op één apparaat en gebruikt groepcodes; formele inschrijvingen blijven op schoolformulieren. `assets/morgen.js` bewaart indeling en bewijscheck apart van de overige lespagina’s. Print het dagplan om de indeling te delen. De benodigde ingrediënten moeten vóór het koken terug zijn; de docent bepaalt tijden, route en groepsbegeleiding.
+`morgen.html` is de directe dagpagina: koken staat los van de carrousel (indekken, poleren, borden dragen). Een derde deel behandelt boodschappen en KC Aquamarijn. Inschrijvingen zijn uitsluitend een herinnering voor de docent; er zijn geen inschrijfvelden voor leerlingen. De bewijschecklist blijft lokaal op het apparaat.
+
+`opening.html` is de openingsdia met vijf lesdoelen, een volledig-schermknop en een rustige, zelf geprogrammeerde instrumentale melodie. Geluid start alleen na een klik en stopt bij verlaten of verbergen van het tabblad. Er wordt geen externe audio geladen. Open de dia via het dagdashboard.
